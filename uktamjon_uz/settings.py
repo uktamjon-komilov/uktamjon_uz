@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import environ
+from django.utils.translation import gettext as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,7 +42,9 @@ ROOT_URLCONF = "uktamjon_uz.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates")
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -49,6 +52,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "uktamjon_uz.context.site_data",
             ],
         },
     },
@@ -103,3 +107,5 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SITE_DEFAULT_TITLE = _("Uktamjon's Blog")
